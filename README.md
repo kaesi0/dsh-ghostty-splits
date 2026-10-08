@@ -6,7 +6,7 @@ Inside that page, panes split Ghostty-style: right or down from the focused pane
 
 - It registers its own tab kind (`terminalTiles`). It does not replace the shipped `terminal` kind.
 - Rendering reuses the shipped terminal chunk (xterm 6.0.0, inlined). PTYs stay on `dsh-api-terminal-controller`.
-- macOS desktop split shortcuts: `⌘D` split right, `⌘⇧D` split down. Windows and Linux use the toolbar for those, because `Ctrl+D` is EOF in a terminal.
+- Split shortcuts follow Ghostty: macOS uses `⌘D` and `⌘⇧D`; Windows uses `Ctrl+Shift+→` and `Ctrl+Shift+↓`. Linux has no default because DSH treats those arrow chords as reserved, which would reject the command.
 - Layout is stored per session and tab. A refresh reconnects the same processes.
 
 Developed against DeepSeek Harness `0.2.0-rc.2`. After a harness upgrade, run `node tools/sync-chunk.mjs` and then `node test/smoke.cjs`.
@@ -34,4 +34,4 @@ Details, rollback, and the smoke checks are in [INSTALL.md](./INSTALL.md).
 
 在官方「新建终端」旁边增加「多窗口终端」。官方卡片和 `⌃\`` 保持不变；本页用自己的卡片打开，macOS 和 Windows 桌面是 `Ctrl+Shift+\``。macOS 浏览器改用 `⌘⇧\``，因为那里保留了前一个组合；Windows 浏览器仍是 `Ctrl+Shift+\``。
 
-页内向右或向下分屏，分隔条可拖动，每格仍是官方 PTY，最多 8 格。macOS 桌面另有 `⌘D`（右分屏）和 `⌘⇧D`（下分屏）。Windows / Linux 的分屏只用工具栏，避免吃掉终端里的 `Ctrl+D`。
+页内向右或向下分屏，分隔条可拖动，每格仍是官方 PTY，最多 8 格。分屏快捷键跟 Ghostty：macOS 是 `⌘D` 和 `⌘⇧D`，Windows 是 `Ctrl+Shift+→` 和 `Ctrl+Shift+↓`。Linux 不能登记这组方向键，只用工具栏。

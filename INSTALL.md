@@ -14,8 +14,8 @@
 |---|---|
 | 打开多窗口终端 | Start 页「多窗口终端」。Mac/Windows 桌面 **Ctrl+Shift+`**；Mac 浏览器 **⌘⇧`**；Windows 浏览器 **Ctrl+Shift+`** |
 | 打开官方终端 | 仍是「新建终端」卡片，或 `⌃\`` |
-| 向右分屏（新格在右） | 工具栏「右分屏」，或 **⌘D**（仅 macOS 桌面） |
-| 向下分屏（新格在下） | 工具栏「下分屏」，或 **⌘⇧D**（仅 macOS 桌面） |
+| 向右分屏（新格在右） | 工具栏「右分屏」。macOS **⌘D**，Windows **Ctrl+Shift+→** |
+| 向下分屏（新格在下） | 工具栏「下分屏」。macOS **⌘⇧D**，Windows **Ctrl+Shift+↓** |
 | 切换焦点 | 点任意格子（焦点格子有品牌色描边） |
 | 调整大小 | 拖动格子之间的分隔条 |
 | 关闭一格 | 格子右上角 `✕`（最后一格不可关） |
@@ -81,7 +81,7 @@ node test/smoke.cjs         # 期望：smoke: all assertions passed
 
 ## 6. 已知限制
 
-- 快捷键只绑 macOS 桌面。Windows / Linux 的 primary 键是 Ctrl，而 Ctrl+D 在终端里是 EOF。
+- 分屏键与 Ghostty 一致：macOS 是 `⌘D` / `⌘⇧D`，Windows 是 `Ctrl+Shift+→` / `Ctrl+Shift+↓`。Linux 把方向键当保留键，登记后整条命令会被拒绝，所以 Linux 不设默认键，用工具栏。
 - 只有二叉分屏，不做 N 叉、浮动或网格平铺。
 - 最多 8 格；每格一个 PTY。
 - 官方终端的 shell 下拉不变。多窗口终端自己的工具栏 `<select>` 写同一个偏好。

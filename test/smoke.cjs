@@ -264,10 +264,20 @@ assert.deepEqual(opened, [{ kind: 'terminalTiles', target: { sessionId: 's1', pa
 
 const splitCommands = seen.shortcuts.filter((command) => command.id !== 'terminalTiles.new');
 assert.deepEqual(splitCommands.map((command) => command.id), ['terminalTiles.splitRight', 'terminalTiles.splitDown']);
-for (const command of splitCommands) {
-	assert.deepEqual(command.defaults, { 'desktop:macos': { code: 'KeyD', modifiers: command.id.endsWith('Down') ? ['primary', 'shift'] : ['primary'] } });
-	assert.deepEqual(command.regions, ['page', 'editable'], 'macOS native bindings ignore regions; no Windows/Linux default swallows Ctrl+D');
-}
+const rightSplit = splitCommands.find((command) => command.id === 'terminalTiles.splitRight');
+const downSplit = splitCommands.find((command) => command.id === 'terminalTiles.splitDown');
+assert.deepEqual(rightSplit.defaults, {
+	'desktop:macos': { code: 'KeyD', modifiers: ['primary'] },
+	'desktop:windows': { code: 'ArrowRight', modifiers: ['control', 'shift'] },
+	'web:windows': { code: 'ArrowRight', modifiers: ['control', 'shift'] }
+});
+assert.deepEqual(downSplit.defaults, {
+	'desktop:macos': { code: 'KeyD', modifiers: ['primary', 'shift'] },
+	'desktop:windows': { code: 'ArrowDown', modifiers: ['control', 'shift'] },
+	'web:windows': { code: 'ArrowDown', modifiers: ['control', 'shift'] }
+});
+assert.equal(rightSplit.defaults['desktop:linux'], undefined, 'Linux rejects arrow defaults and would refuse the command');
+for (const command of splitCommands) assert.deepEqual(command.regions, ['page', 'editable', 'terminal']);
 assert.ok(!seen.shortcuts.some((command) => command.id === 'terminal.new'), 'the shipped new-terminal command is not re-registered');
 //#endregion
 
