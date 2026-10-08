@@ -1,7 +1,7 @@
 {
   "name": "dsh-ghostty-splits",
   "version": "0.1.0",
-  "description": "右侧边栏终端改为 Ghostty 式分屏：同一个终端标签页内向右/向下分屏，分隔条可拖动",
+  "description": "在官方新建终端旁边增加多窗口终端：同一标签页内向右或向下分屏，分隔条可拖动",
   "license": "MIT",
   "repository": {
     "type": "git",
