@@ -1,0 +1,15 @@
+lib/client.terminal.js is a vendored, identity-rewritten copy of the terminal
+browser chunk shipped with DeepSeek Harness:
+
+  @deepseek-ai/dsh-client-ui-sidebar-terminal/lib/client.terminal.js
+
+Upstream copyright (c) 2026 DeepSeek, MIT License. The original license text
+is reproduced in THIRD_PARTY_NOTICES.md. This file is not obfuscated: the only
+edits replace the module id, CSS tag ids, and the data-plugin attribute with
+`dsh-ghostty-splits`, and drop the source-map trailer. Refresh it from a
+local DeepSeek Harness install with:
+
+  node tools/sync-chunk.mjs
+
+Everything else in this repository is original to dsh-ghostty-splits and is
+covered by LICENSE.

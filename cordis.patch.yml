@@ -1,0 +1,7 @@
+# dsh-ghostty-splits bundle patch: one Host Loader row. The same package's
+# `dsh.client` declaration registers the browser half, which takes over the
+# shipped `terminal` tab kind. Disable or remove this row to restore the
+# shipped one-tab-per-terminal behaviour.
+- insert:
+    - id: dsh-ghostty-splits
+      name: 'dsh-ghostty-splits'

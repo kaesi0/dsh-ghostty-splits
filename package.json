@@ -1,0 +1,50 @@
+{
+  "name": "dsh-ghostty-splits",
+  "version": "0.1.0",
+  "description": "右侧边栏终端改为 Ghostty 式分屏：同一个终端标签页内向右/向下分屏，分隔条可拖动",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaesi0/dsh-ghostty-splits.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kaesi0/dsh-ghostty-splits/issues"
+  },
+  "homepage": "https://github.com/kaesi0/dsh-ghostty-splits#readme",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "lib/client.terminal.js",
+    "cordis.patch.yml",
+    "LICENSE",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-ui-sidebar-terminal",
+        "@deepseek-ai/dsh-api-terminal-controller",
+        "@deepseek-ai/dsh-client-ui-theme",
+        "@deepseek-ai/dsh-client-shortcuts"
+      ]
+    }
+  }
+}
