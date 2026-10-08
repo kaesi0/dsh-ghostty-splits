@@ -1,6 +1,6 @@
 # dsh-ghostty-splits
 
-Adds a **Multi-window Terminal** page next to the shipped right-sidebar terminal. The shipped "New terminal" card and `⌃\`` stay as they are. This page opens from its own card, or with `Ctrl+Shift+\`` on every platform.
+Adds a **Multi-window Terminal** page next to the shipped right-sidebar terminal. The shipped "New terminal" card and `⌃\`` stay as they are. This page opens from its own card, or with `Ctrl+Shift+\`` in the desktop app. In a browser the default is `Alt+Shift+\``, because macOS reserves `Ctrl+Shift+\``.
 
 Inside that page, panes split Ghostty-style: right or down from the focused pane, with draggable dividers. Each pane is still an official PTY. Up to 8 panes.
 
@@ -19,7 +19,7 @@ dsh plugin --profile desktop add github:kaesi0/dsh-ghostty-splits
 
 Use `--profile web` instead when the plugin should load in `dsh web`. The desktop profile applies the bundle without a restart; refresh the page.
 
-Open **Multi-window Terminal** from the Start page, or press `Ctrl+Shift+\``. The shipped terminal card and `⌃\`` are unchanged. The toolbar also has split, close, and shell controls. The shell menu writes the official `dsh.terminal.shell` preference and applies to panes created afterwards.
+Open **Multi-window Terminal** from the Start page. The desktop shortcut is `Ctrl+Shift+\``; a browser uses `Alt+Shift+\``. The shipped terminal card and `⌃\`` are unchanged. The toolbar also has split, close, and shell controls. The shell menu writes the official `dsh.terminal.shell` preference and applies to panes created afterwards.
 
 ## Limits
 
@@ -32,6 +32,6 @@ Details, rollback, and the smoke checks are in [INSTALL.md](./INSTALL.md).
 
 ## 中文
 
-在官方「新建终端」旁边增加「多窗口终端」。官方卡片和 `⌃\`` 保持不变；本页用自己的卡片打开，默认快捷键是各平台的 `Ctrl+Shift+\``。
+在官方「新建终端」旁边增加「多窗口终端」。官方卡片和 `⌃\`` 保持不变；本页用自己的卡片打开，桌面快捷键是 `Ctrl+Shift+\``，浏览器是 `Alt+Shift+\``，因为 macOS 浏览器保留了前一个组合。
 
 页内向右或向下分屏，分隔条可拖动，每格仍是官方 PTY，最多 8 格。macOS 桌面另有 `⌘D`（右分屏）和 `⌘⇧D`（下分屏）。Windows / Linux 的分屏只用工具栏，避免吃掉终端里的 `Ctrl+D`。

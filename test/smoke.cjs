@@ -247,15 +247,16 @@ assert.equal(definition.guide[0].icon({ size: 22 }).type, 'svg', 'the guide glyp
 const openCommand = seen.shortcuts.find((command) => command.id === 'terminalTiles.new');
 assert.ok(openCommand, 'the open command is registered');
 assert.equal(openCommand.label(), 'terminalTiles:shortcut.open');
-const openBinding = { code: 'Backquote', modifiers: ['control', 'shift'] };
+const desktopOpen = { code: 'Backquote', modifiers: ['control', 'shift'] };
+const webOpen = { code: 'Backquote', modifiers: ['alt', 'shift'] };
 assert.deepEqual(openCommand.defaults, {
-	'desktop:macos': openBinding,
-	'desktop:windows': openBinding,
-	'desktop:linux': openBinding,
-	'web:macos': openBinding,
-	'web:windows': openBinding,
-	'web:linux': openBinding
-}, 'Ctrl+Shift+` is the default on every profile, and it does not claim Ctrl+`');
+	'desktop:macos': desktopOpen,
+	'desktop:windows': desktopOpen,
+	'desktop:linux': desktopOpen,
+	'web:macos': webOpen,
+	'web:windows': webOpen,
+	'web:linux': webOpen
+}, 'desktop uses Ctrl+Shift+`; web uses Alt+Shift+` because the macOS browser reserves the first chord');
 const openedTab = openCommand.resolve({ target: {} });
 assert.equal(openedTab.status, 'handled');
 openedTab.run();

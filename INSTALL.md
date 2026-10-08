@@ -6,13 +6,13 @@
 
 - 开发目标：DeepSeek Harness `0.2.0-rc.2`
 - 中文名称：多窗口终端；英文：Multi-window Terminal
-- 打开：Start 页自己的卡片，或 `Ctrl+Shift+\``（macOS / Windows / Linux，桌面与 web）
+- 打开：Start 页自己的卡片。桌面是 `Ctrl+Shift+\``；浏览器是 `Alt+Shift+\``（macOS 浏览器把 `Ctrl+Shift+\`` 视为保留键，用它会导致整条命令注册失败）
 
 ## 1. 使用
 
 | 操作 | 方式 |
 |---|---|
-| 打开多窗口终端 | Start 页「多窗口终端」卡片，或 **Ctrl+Shift+`** |
+| 打开多窗口终端 | Start 页「多窗口终端」卡片。桌面 **Ctrl+Shift+`**，浏览器 **Alt+Shift+`** |
 | 打开官方终端 | 仍是「新建终端」卡片，或 `⌃\`` |
 | 向右分屏（新格在右） | 工具栏「右分屏」，或 **⌘D**（仅 macOS 桌面） |
 | 向下分屏（新格在下） | 工具栏「下分屏」，或 **⌘⇧D**（仅 macOS 桌面） |
@@ -77,7 +77,7 @@ node tools/sync-chunk.mjs   # 仅 DSH 升级后需要
 node test/smoke.cjs         # 期望：smoke: all assertions passed
 ```
 
-`test/smoke.cjs` 覆盖：chunk 身份、`inject` 列表、加载完成前不注册、页面类型不是 `terminal`、打开命令默认键是 `Ctrl+Shift+\``、分屏与关闭、布局持久化、保留并集、焦点与分隔条比例、Shell 偏好写回。
+`test/smoke.cjs` 覆盖：chunk 身份、`inject` 列表、加载完成前不注册、页面类型不是 `terminal`、桌面打开键是 `Ctrl+Shift+\``、浏览器打开键是 `Alt+Shift+\``、分屏与关闭、布局持久化、保留并集、焦点与分隔条比例、Shell 偏好写回。
 
 ## 6. 已知限制
 
