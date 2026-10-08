@@ -222,6 +222,23 @@ assert.deepEqual(
 );
 loaded.apply(ctx);
 
+const marker = seen.slots.find((entry) => typeof entry === 'object' && entry.options && entry.options.name === 'sidebar.session.row.leading');
+assert.ok(marker, 'the session-list mark is registered before the terminal chunk loads');
+assert.equal(marker.options.order, 20);
+const marked = render(marker.component, {
+	sessionId: 's1',
+	openTabs,
+	t: (key) => `terminalTiles:${key}`
+});
+assert.equal(marked.type, 'span', 'a Session with an open terminal shows the mark');
+assert.equal(marked.props['aria-label'], 'terminalTiles:session.marker');
+const unmarked = render(marker.component, {
+	sessionId: 's2',
+	openTabs,
+	t: (key) => `terminalTiles:${key}`
+});
+assert.equal(unmarked, null, 'a Session without a terminal shows nothing');
+
 //#region deferred takeover
 assert.equal(asyncChunkCalls, 1, 'the chunk is requested once');
 assert.equal(seen.tabs.length, 0, 'nothing is registered until the official UI has loaded');
@@ -282,7 +299,7 @@ assert.ok(!seen.shortcuts.some((command) => command.id === 'terminal.new'), 'the
 //#endregion
 
 //#region body + tiling
-const body = seen.slots.find((entry) => typeof entry === 'object' && entry.options);
+const body = seen.slots.find((entry) => typeof entry === 'object' && entry.options && entry.options.name === 'sidebar.right.pane.tab');
 assert.ok(body, 'the tab body is registered');
 assert.equal(body.options.name, 'sidebar.right.pane.tab');
 assert.equal(body.options.key, 'dsh-ghostty-splits');
