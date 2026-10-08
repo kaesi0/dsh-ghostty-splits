@@ -247,16 +247,16 @@ assert.equal(definition.guide[0].icon({ size: 22 }).type, 'svg', 'the guide glyp
 const openCommand = seen.shortcuts.find((command) => command.id === 'terminalTiles.new');
 assert.ok(openCommand, 'the open command is registered');
 assert.equal(openCommand.label(), 'terminalTiles:shortcut.open');
-const desktopOpen = { code: 'Backquote', modifiers: ['control', 'shift'] };
-const webOpen = { code: 'Backquote', modifiers: ['alt', 'shift'] };
+const controlShiftBackquote = { code: 'Backquote', modifiers: ['control', 'shift'] };
+const commandShiftBackquote = { code: 'Backquote', modifiers: ['primary', 'shift'] };
 assert.deepEqual(openCommand.defaults, {
-	'desktop:macos': desktopOpen,
-	'desktop:windows': desktopOpen,
-	'desktop:linux': desktopOpen,
-	'web:macos': webOpen,
-	'web:windows': webOpen,
-	'web:linux': webOpen
-}, 'desktop uses Ctrl+Shift+`; web uses Alt+Shift+` because the macOS browser reserves the first chord');
+	'desktop:macos': controlShiftBackquote,
+	'desktop:windows': controlShiftBackquote,
+	'web:macos': commandShiftBackquote,
+	'web:windows': controlShiftBackquote
+}, 'Mac and Windows each get a chord the shell accepts; Linux web is unbound');
+assert.equal(openCommand.defaults['desktop:linux'], undefined);
+assert.equal(openCommand.defaults['web:linux'], undefined);
 const openedTab = openCommand.resolve({ target: {} });
 assert.equal(openedTab.status, 'handled');
 openedTab.run();
