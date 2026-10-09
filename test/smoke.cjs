@@ -92,8 +92,9 @@ const react = {
 		hookIndex++;
 		return getSnapshot();
 	},
-	createElement(type, props, children) {
-		return { type, props, children };
+	createElement(type, props, ...children) {
+		const child = children.length === 1 ? children[0] : children.length === 0 ? undefined : children;
+		return { type, props, children: child };
 	}
 };
 function render(Component, props) {
@@ -318,7 +319,7 @@ function bodyProps() {
 let tree = render(body.component, bodyProps());
 assert.equal(tree.type, 'div', 'the page renders');
 assert.equal(tree.children.length, 2, 'toolbar plus content');
-const contentElement = tree.children[1];
+const contentElement = tree.children[1].children;
 assert.equal(contentElement.type.name, 'SplitNode', 'the content is the tiling root');
 // A leaf layout renders one Tile, which renders the shipped terminal body. Neither
 // component calls hooks itself, so calling them directly is safe here.
