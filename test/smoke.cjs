@@ -226,14 +226,14 @@ const marker = seen.slots.find((entry) => typeof entry === 'object' && entry.opt
 assert.ok(marker, 'the session-list mark is registered before the terminal chunk loads');
 assert.equal(marker.options.order, 20);
 const marked = render(marker.component, {
-	sessionId: 's1',
+	session: { id: 's1' },
 	openTabs,
 	t: (key) => `terminalTiles:${key}`
 });
 assert.equal(marked.type, 'span', 'a Session with an open terminal shows the mark');
 assert.equal(marked.props['aria-label'], 'terminalTiles:session.marker');
 const unmarked = render(marker.component, {
-	sessionId: 's2',
+	session: { id: 's2' },
 	openTabs,
 	t: (key) => `terminalTiles:${key}`
 });
