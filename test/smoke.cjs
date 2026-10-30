@@ -356,6 +356,35 @@ assert.equal(injected.face.split(state, 'column'), true, 'split down on the focu
 assert.equal(state.layout.second.type, 'split', 'splits nest');
 assert.equal(state.layout.second.axis, 'column', 'and keep their own axis');
 
+//#region fit contract
+// The shipped body re-fits xterm only while its tab reports `visible`. A tile
+// that omits the flag keeps the 24-row size the PTY was created with, so the
+// newest lines of a stacked pane sit below its bottom edge and no scroll
+// reaches them. Every pane, focused or not, has to report itself visible.
+const splitTree = render(body.component, bodyProps());
+function tileElements(element) {
+	if (element === undefined || element === null || typeof element !== 'object') return [];
+	// Tile renders the shipped body plus the close control; the body element is
+	// the one that receives this plugin's `useTabInfo`.
+	if (element.type.name === 'Tile') {
+		const rendered = element.type(element.props);
+		return rendered.children.filter((child) => child !== null && typeof child === 'object' && child.props !== undefined && typeof child.props.useTabInfo === 'function');
+	}
+	// SplitNode and SplitBox are pure: calling them expands one level of tree.
+	if (element.type.name === 'SplitNode' || element.type.name === 'SplitBox') return tileElements(element.type(element.props));
+	if (Array.isArray(element.children)) return element.children.flatMap((child) => tileElements(child));
+	return tileElements(element.children);
+}
+const splitTiles = tileElements(splitTree.children[1].children);
+assert.equal(splitTiles.length, 3, 'every pane in the tree renders its own tile');
+for (const element of splitTiles) {
+	const info = element.props.useTabInfo();
+	assert.equal(info.tab.visible, true, 'a pane reports itself visible so the body re-fits it');
+	assert.match(info.tab.id, /^tile-/u, 'and keeps its own identity');
+}
+assert.equal(new Set(splitTiles.map((element) => element.props.useTabInfo().tab.id)).size, 3, 'identities stay distinct');
+//#endregion
+
 const stored = JSON.parse(storage.get('dsh-ghostty-splits.v1.s1.sidebar://terminalTiles/tiles'));
 assert.equal(Object.keys(stored.tiles).length, 3, 'all three panes are persisted');
 assert.equal(stored.tiles[firstTileKey].contentId, viewCalls[0].contentId, 'the binding identity survives a reload');
